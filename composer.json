@@ -1,0 +1,87 @@
+{
+    "name": "settermjd/mezzio-markdown-blog",
+    "description": "This is a file-based blog module for PHP's Mezzio framework that renders blog articles written in Markdown format, with YAML front-matter into HTML content that can be rendered in a template.",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "mezzio",
+        "markdown",
+        "html",
+        "blog",
+        "middleware",
+        "psr",
+        "psr-7",
+        "psr-11",
+        "psr-15"
+    ],
+    "support": {
+        "docs": "https://github.com/settermjd/mezzio-markdown-blog/issues",
+        "issues": "https://github.com/settermjd/mezzio-markdown-blog/issues",
+        "source": "https://github.com/settermjd/mezzio-markdown-blog",
+        "rss": "https://github.com/settermjd/mezzio-markdown-blog/releases.atom"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laminas": {
+            "component-whitelist": [
+                "mezzio/mezzio",
+                "mezzio/mezzio-helpers",
+                "mezzio/mezzio-router",
+                "laminas/laminas-httphandlerrunner",
+                "mezzio/mezzio-fastroute",
+                "mezzio/mezzio-twigrenderer"
+            ]
+        }
+    },
+    "require": {
+        "php": "^7.4 || ~8.0.0",
+        "composer/package-versions-deprecated": "^1.10.99",
+        "laminas/laminas-component-installer": "^2.5.0",
+        "laminas/laminas-config-aggregator": "^1.5.0",
+        "laminas/laminas-diactoros": "^2.6.0",
+        "laminas/laminas-servicemanager": "^3.4",
+        "laminas/laminas-stdlib": "^3.3.1",
+        "laminas/laminas-zendframework-bridge": "^1.2.0",
+        "mezzio/mezzio": "^3.5.0",
+        "mezzio/mezzio-fastroute": "^3.0.3",
+        "mezzio/mezzio-helpers": "^5.6.0",
+        "mezzio/mezzio-twigrenderer": "^2.6",
+        "michelf/php-markdown": "^1.9",
+        "mnapoli/front-yaml": "^2.0",
+        "zetacomponents/feed": "^1.4"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.7.1",
+        "laminas/laminas-development-mode": "^3.3.0",
+        "mezzio/mezzio-tooling": "^1.4.0",
+        "mikey179/vfsstream": "^1.6",
+        "mockery/mockery": "^1.4",
+        "phpspec/phpspec": "^7.1",
+        "phpspec/prophecy": "^1.10.3",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.4.1",
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "MarkdownBlog\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MarkdownBlogTest\\": "test/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@test"
+        ],
+        "clear-config-cache": "php bin/clear-config-cache.php",
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    }
+}

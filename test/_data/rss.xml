@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:rawvoice="http://www.rawvoice.com/rawvoiceRssModule/" version="2.0">
+    <channel>
+        <title>Free the Geek.fm with Matthew Setter</title>
+        <description>A fireside chat on the ins and outs of being a freelance writer, screencaster,
+            teacher, and software developer. Looking at what it’s like to do it, warts and all, as
+            well as how to get started, what to expect, the good, the bad, and the ugly. When we’re
+            not talking that, we’re talking tech, code, apps, development, and of course PHP.
+        </description>
+        <link>http://www.freethegeek.fm</link>
+        <language>en-us</language>
+        <copyright>Copyright Matthew Setter 2015</copyright>
+        <lastBuildDate>Mon, 17 Aug 2015 06:00:00 +0200</lastBuildDate>
+        <pubDate>Mon, 17 Aug 2015 06:00:00 +0200</pubDate>
+        <itunes:author>FreetheGeek.fm with Matthew Setter</itunes:author>
+        <itunes:subtitle>The podcast about the business of freelancing as a software developer,
+            writer, content producer, and all round PHP lover
+        </itunes:subtitle>
+        <itunes:summary>A fireside chat on the ins and outs of being a freelance writer,
+            screencaster, teacher, and software developer. Looking at what it’s like to do it, warts
+            and all, as well as how to get started, what to expect, the good, the bad, and the ugly.
+            When we’re not talking that, we’re talking tech, code, apps, development, and of course
+            PHP.
+        </itunes:summary>
+        <itunes:owner>
+            <itunes:name>FreetheGeek.fm with Matthew Setter</itunes:name>
+            <itunes:email>matthew@freethegeek.fm</itunes:email>
+        </itunes:owner>
+        <itunes:explicit>No</itunes:explicit>
+        <itunes:image href="http://traffic.libsyn.com/thegeekyfreelancer/itunes.png"/>
+        <itunes:category text="Technology">
+            <itunes:category text="Podcasting"/>
+        </itunes:category>
+        <!-- START BlogArticle 0002 -->
+        <item>
+            <title>
+                Item 002 – Discussing the Mythical Man Month with Paul M. Jones; plus speaking at php[world] and Nomad PHP.
+            </title>
+            <link>
+                http://freethegeek.fm/episode/episode-0002
+            </link>
+            <itunes:image href="http://traffic.libsyn.com/thegeekyfreelancer/itunes.png"/>
+            <comments>
+                http://freethegeek.fm/episode/episode-0002/#comments
+            </comments>
+            <pubDate>Mon, 03 Aug 2015 16:30:00 +0200</pubDate>
+            <dc:creator>
+                <![CDATA[ settermjd ]]>
+            </dc:creator>
+            <category>
+                <![CDATA[ freelancing ]]>
+            </category>
+            <category>
+                <![CDATA[ software development ]]>
+            </category>
+            <category>
+                <![CDATA[ technical writing ]]>
+            </category>
+            <category>
+                <![CDATA[ php ]]>
+            </category>
+            <category>
+                <![CDATA[ The Mythical Man Month ]]>
+            </category>
+            <category>
+                <![CDATA[ Paul M. Jones ]]>
+            </category>
+            <category>
+                <![CDATA[ PHP South Coast ]]>
+            </category>
+            <category>
+                <![CDATA[ Nomad PHP ]]>
+            </category>
+            <category>
+                <![CDATA[ PHP[World] ]]>
+            </category>
+            <category>
+                <![CDATA[ Outliers by Malcolm Gladwell ]]>
+            </category>
+            <guid isPermaLink="false">http://freethegeek.fm/episode/episode-0002</guid>
+            <description>
+                <![CDATA[
+<p>
+In this episode, I have a fireside chat with internationally recognized PHP expert, and all around good fella Paul M. Jones, about one of his all-time favorite books - The Mythical Man Month. We talk about why the book is so valuable to him, how it's helped shape his career over the years, and the lessons it can teach all of us as software developers, lessons still relevant over 40 years after it was first published, in 1975. I've also got updates on what's been happening for me personally in my freelancing business; including speaking at php[world], attending the inaugural PHP South Coast, and much, much more.
+</p>
+]]>
+            </description>
+            <content:encoded>
+                <![CDATA[
+<p style="text-align: justify;">
+In this episode, I have a fireside chat with internationally recognized PHP expert, and all around good fella Paul M. Jones, about one of his all-time favorite books - The Mythical Man Month. We talk about why the book is so valuable to him, how it's helped shape his career over the years, and the lessons it can teach all of us as software developers, lessons still relevant over 40 years after it was first published, in 1975. I've also got updates on what's been happening for me personally in my freelancing business; including speaking at php[world], attending the inaugural PHP South Coast, and much, much more.
+</p>
+]]>
+            </content:encoded>
+            <wfw:commentRss>
+                http://freethegeek.fm/episode/episode-0002/feed/
+            </wfw:commentRss>
+            <slash:comments>0</slash:comments>
+            <enclosure
+                    url="http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0002.mp3"
+                    length="155295450" type="audio/mpeg"/>
+            <itunes:subtitle>
+                In this episode, I have a fireside chat with internationally recognized PHP expert, and all around good fella Paul M. Jones, about one of his all-time favorite books - The Mythical Man Month. We talk about why the book is so valuable to him, how it's helped shape his career over the years, and the lessons it can teach all of us as software developers, lessons still relevant over 40 years after it was first published, in 1975.
+            </itunes:subtitle>
+            <itunes:summary>
+                In this episode, I have a fireside chat with internationally recognized PHP expert, and all around good fella Paul M. Jones, about one of his all-time favorite books - The Mythical Man Month. We talk about why the book is so valuable to him, how it's helped shape his career over the years, and the lessons it can teach all of us as software developers, lessons still relevant over 40 years after it was first published, in 1975. I've also got updates on what's been happening for me personally in my freelancing business; including speaking at php[world], attending the inaugural PHP South Coast, and much, much more.
+            </itunes:summary>
+            <itunes:author>FreetheGeek.fm with Matthew Setter</itunes:author>
+            <itunes:explicit>clean</itunes:explicit>
+            <itunes:duration>53:52</itunes:duration>
+        </item>
+        <!-- END BlogArticle 0002 -->
+        <!-- START BlogArticle 0003 -->
+        <item>
+            <title>
+In this episode, I have a fireside chat with voice of the PHP community, the one and only, <a href="http://blog.calevans.com/">Cal Evans</a>, about one of his books - <a href="https://leanpub.com/goingpro">Going Pro</a>.
+            </title>
+            <link>
+                http://freethegeek.fm/episode/episode-0003
+            </link>
+            <itunes:image href="http://traffic.libsyn.com/thegeekyfreelancer/itunes.png"/>
+            <comments>
+                http://freethegeek.fm/episode/episode-0003/#comments
+            </comments>
+            <pubDate>Mon, 17 Aug 2015 06:00:00 +0200</pubDate>
+            <dc:creator>
+                <![CDATA[ settermjd ]]>
+            </dc:creator>
+            <category>
+                <![CDATA[ freelancing ]]>
+            </category>
+            <category
+                <![CDATA[ Going Pro ]]>
+            </category>
+            <category>
+                <![CDATA[ Cal Evans ]]>
+            </category>
+            <category>
+                <![CDATA[ php ]]>
+            </category>
+            <category>
+                <![CDATA[ Matthew Weier O'Phinney ]]>
+            </category>
+            <category>
+                <![CDATA[ Taylor Otwell ]]>
+            </category>
+            <category>
+                <![CDATA[ Nomad PHP ]]>
+            </category>
+            <guid isPermaLink="false">http://freethegeek.fm/episode/episode-0003</guid>
+            <description>
+                <![CDATA[
+<p>
+In this episode, I have a fireside chat with voice of the PHP community, the one and only, <a href="http://blog.calevans.com/">Cal Evans</a>, about one of his books - <a href="https://leanpub.com/goingpro">Going Pro</a>. We talk about a range of things, including what motivated him to write the book, how the book's been received, people Cal believes are excellent examples of professional programmers, and much, much more. Join me for what is a truly excellent fireside chat about some of the key aspects of being a professional.
+</p>
+]]>
+            </description>
+            <content:encoded>
+                <![CDATA[
+<p style="text-align: justify;">
+In this episode, I have a fireside chat with voice of the PHP community, the one and only, <a href="http://blog.calevans.com/">Cal Evans</a>, about one of his books - <a href="https://leanpub.com/goingpro">Going Pro</a>. We talk about a range of things, including what motivated him to write the book, how the book's been received, people Cal believes are excellent examples of professional programmers, and much, much more. Join me for what is a truly excellent fireside chat about some of the key aspects of being a professional.
+</p>
+]]>
+            </content:encoded>
+            <wfw:commentRss>
+                http://freethegeek.fm/episode/episode-0003/feed/
+            </wfw:commentRss>
+            <slash:comments>0</slash:comments>
+            <enclosure
+                    url="http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0003.mp3"
+                    length="39816586" type="audio/mpeg"/>
+            <itunes:subtitle>
+              In this episode, I have a fireside chat with voice of the PHP community, the one and only, <a href="http://blog.calevans.com/">Cal Evans</a>, about one of his books - <a href="https://leanpub.com/goingpro">Going Pro</a>. We talk about a range of things, including what motivated him to write the book, how the book's been received, people Cal believes are excellent examples of professional programmers, and much, much more. Join me for what is a truly excellent fireside chat about some of the key aspects of being a professional.
+            </itunes:subtitle>
+            <itunes:summary>
+              In this episode, I have a fireside chat with voice of the PHP community, the one and only, <a href="http://blog.calevans.com/">Cal Evans</a>, about one of his books - <a href="https://leanpub.com/goingpro">Going Pro</a>. We talk about a range of things, including what motivated him to write the book, how the book's been received, people Cal believes are excellent examples of professional programmers, and much, much more. Join me for what is a truly excellent fireside chat about some of the key aspects of being a professional.
+            </itunes:summary>
+            <itunes:author>FreetheGeek.fm with Matthew Setter</itunes:author>
+            <itunes:explicit>clean</itunes:explicit>
+            <itunes:duration>41:23</itunes:duration>
+        </item>
+        <!-- START BlogArticle 0003 -->
+    </channel>
+</rss>
+
