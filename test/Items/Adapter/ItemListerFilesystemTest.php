@@ -23,16 +23,15 @@ class ItemListerFilesystemTest extends TestCase
      */
     public function testAdapterCanProperlyBuildEpisodeObject()
     {
-        $this->markTestIncomplete();
         $filePath = __DIR__ . '/../../_data/posts';
         $episodeLister = new ItemListerFilesystem($filePath, new Parser());
 
         $content =<<<EOF
 ### Synopsis
 
-In this blogArticle I have a fireside chat about what it’s like to live the life of a developer evangelist with Jack Skinner, otherwise known as @developerjack, whilst he was at the first BuzzConf. He talked with me about the crazy hours, random locations, shared some stories from the road, such as having a conference call whilst walking down the boarding gate to catch a flight.
+In this episode I have a fireside chat about what it’s like to live the life of a developer evangelist with Jack Skinner, otherwise known as @developerjack, whilst he was at the first BuzzConf. He talked with me about the crazy hours, random locations, shared some stories from the road, such as having a conference call whilst walking down the boarding gate to catch a flight.
 
-If you don’t, yet, know Jack, he’s a developer evangelist at MYOB, which is an Australian Software Accounting firm, the market leader I believe. He shared so much gold in this chat that I’m itching to share it with you. Here’s a summary of the key things he said.
+If you don’t, yet, know Jack, he’s a developer evangelist at MYOB, which is an Australian software development company specialising in accounting and business management software, the market leader I believe. He shared so much gold in this chat that I’m itching to share it with you. Here’s a summary of the key things he said.
 
 - An evangelist works closely with the community
 - He helps developers build awesome software, preferably with our (MYOB’s) platform

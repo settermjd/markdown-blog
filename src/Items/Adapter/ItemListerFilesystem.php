@@ -2,14 +2,10 @@
 
 namespace MarkdownBlog\Items\Adapter;
 
-use ArrayIterator;
 use DirectoryIterator;
 use MarkdownBlog\Items\ItemListerInterface;
-use MarkdownBlog\Iterator\CurrentItemFilterIterator;
-use MarkdownBlog\Sorter\SortByReverseDateOrder;
+use MarkdownBlog\Iterator\MarkdownFileFilterIterator;
 use MarkdownBlog\Entity\BlogArticle;
-use MarkdownBlog\Iterator\UpcomingItemFilterIterator;
-use MarkdownBlog\Iterator\PastItemFilterIterator;
 use Mni\FrontYAML\Document;
 use Traversable;
 
@@ -28,7 +24,7 @@ class ItemListerFilesystem implements ItemListerInterface
 
     protected string $postDirectory;
     protected object $fileParser;
-    protected CurrentItemFilterIterator $episodeIterator;
+    protected MarkdownFileFilterIterator $episodeIterator;
     protected ?object $cache = null;
 
     public function __construct(string $postDirectory, object $fileParser, $cache = null)
@@ -40,7 +36,7 @@ class ItemListerFilesystem implements ItemListerInterface
             $this->cache = $cache;
         }
 
-        $this->episodeIterator = new CurrentItemFilterIterator(
+        $this->episodeIterator = new MarkdownFileFilterIterator(
             new DirectoryIterator($this->postDirectory)
         );
     }
@@ -63,60 +59,6 @@ class ItemListerFilesystem implements ItemListerInterface
         }
 
         return $this->buildEpisodesList();
-    }
-
-    public function getUpcomingItems(): array
-    {
-        $list = [];
-        $upcomingEpisodeIterator = new UpcomingItemFilterIterator(
-            new ArrayIterator(
-                $this->getItemList(self::CACHE_KEY_SUFFIX_UPCOMING)
-            )
-        );
-
-        foreach ($upcomingEpisodeIterator as $upcomingEpisode) {
-            $list[] = $upcomingEpisode;
-        }
-
-        return $list;
-    }
-
-    /**
-     * Get all past episodes, optionally excluding the latest.
-     */
-    public function getPastItems(bool $includeLatest = true): array
-    {
-        $list = [];
-        $iterator = new PastItemFilterIterator(
-            new ArrayIterator(
-                $this->getItemList(self::CACHE_KEY_SUFFIX_PAST)
-            )
-        );
-
-        foreach ($iterator as $episode) {
-            $list[] = $episode;
-        }
-
-        // Sort the records in reverse date order
-        $sorter = new SortByReverseDateOrder();
-        usort($list, $sorter);
-
-        if (!$includeLatest) {
-            return array_splice($list, 1);
-        }
-
-        return $list;
-    }
-
-    /**
-     * @return BlogArticle|void
-     */
-    public function getLatestItem()
-    {
-        $episodes = $this->getPastItems();
-        if (!empty($episodes)) {
-            return $episodes[0];
-        }
     }
 
     protected function buildEpisodesList(): array

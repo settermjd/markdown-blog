@@ -14,7 +14,4 @@ interface ItemListerInterface
 {
     public function getItem(string $episodeSlug);
     public function getItemList();
-    public function getLatestItem();
-    public function getPastItems();
-    public function getUpcomingItems();
 }

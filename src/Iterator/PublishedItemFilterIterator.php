@@ -10,12 +10,12 @@ use Iterator;
 use MarkdownBlog\Entity\BlogArticle;
 
 /**
- * Class PastItemFilterIterator.
+ * Class PublishedItemFilterIterator.
  *
  * @author Matthew Setter <matthew@matthewsetter.com>
  * @copyright 2015 Matthew Setter
  */
-class PastItemFilterIterator extends \FilterIterator
+class PublishedItemFilterIterator extends \FilterIterator
 {
     public function __construct(Iterator $iterator)
     {

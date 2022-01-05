@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace MarkdownBlogTest;
 
+use ArrayIterator;
 use MarkdownBlog\Entity\BlogArticle;
 use MarkdownBlog\Items\Adapter\ItemListerFilesystem;
+use MarkdownBlog\Iterator\PublishedItemFilterIterator;
+use MarkdownBlog\Iterator\UpcomingItemFilterIterator;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
@@ -27,10 +30,10 @@ slug: item-0001
 title: Getting Underway, The E-Myth Revisited, and Networking For Success
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0001.mp3
 tags:
-    "PHP"
-    "Docker"
+  - "PHP"
+  - "Docker"
 categories:
-    "Software Development"
+  - "Software Development"
 ---
 ### Synopsis
 
@@ -53,10 +56,10 @@ slug: item-0002
 title: The Mythical Man Month with Paul M. Jones & Speaking Engagements
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0002.mp3
 tags:
-    "PHP"
-    "Docker"
+  - "PHP"
+  - "Docker"
 categories:
-    "Software Development"
+  - "Software Development"
 ---
 ### Synopsis
 
@@ -88,10 +91,10 @@ slug: item-0003
 title: The Mythical Man Month with Paul M. Jones & Speaking Engagements
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0002.mp3
 tags:
-    "PHP"
-    "Docker"
+  - "PHP"
+  - "Docker"
 categories:
-    "Software Development"
+  - "Software Development"
 ---
 ### Synopsis
 
@@ -116,10 +119,10 @@ slug: item-0004
 title: Wisdom as a Service World Tour and Human Skills - with Yitzchok Willroth
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0004.mp3
 tags:
-    "PHP"
-    "Docker"
+  - "PHP"
+  - "Docker"
 categories:
-    "Software Development"
+  - "Software Development"
 ---
 ### Synopsis
 
@@ -150,66 +153,38 @@ EOF;
         ];
     }
 
-    public function testCanFilterUpcomingEpisodes()
+    public function testCanFilterUpcomingItems()
     {
         /** @var vfsStreamDirectory $directory */
         vfsStream::setup('root', null, $this->structure);
 
         $itemLister = new ItemListerFilesystem(vfsStream::url('root/posts'), new Parser());
-
-        $this->assertTrue(
-            count($itemLister->getUpcomingItems()) == 2,
-            "Incorrect upcoming item count retrieved"
+        $upcomingItems = new UpcomingItemFilterIterator(
+            new ArrayIterator(
+                $itemLister->getItemList()
+            )
+        );
+        $this->assertCount(
+            2,
+            $upcomingItems,
+            sprintf(
+                "Incorrect upcoming item count retrieved. Count was %s",
+                iterator_count($upcomingItems)
+            )
         );
     }
 
-    public function testCanRenderUpcomingEpisodesOrderedByDate()
+    public function testCanGetAllPastItems()
     {
         /** @var vfsStreamDirectory $directory */
         vfsStream::setup('root', null, $this->structure);
 
         $itemLister = new ItemListerFilesystem(vfsStream::url('root/posts'), new Parser());
-        $upcomingEpisodes = $itemLister->getUpcomingItems();
-
-        $this->assertTrue(
-            $upcomingEpisodes[0]->getPublishDate() < $upcomingEpisodes[1]->getPublishDate(),
-            "The upcoming items are not sorted in ascending publish date order"
+        $publishedItems = new PublishedItemFilterIterator(
+            new ArrayIterator(
+                $itemLister->getItemList()
+            )
         );
-    }
-
-    public function testCanGetAllPastEpisodes()
-    {
-        /** @var vfsStreamDirectory $directory */
-        vfsStream::setup('root', null, $this->structure);
-
-        $itemLister = new ItemListerFilesystem(vfsStream::url('root/posts'), new Parser());
-        $this->assertTrue(count($itemLister->getPastItems()) == 2, "Incorrect past item count retrieved");
-    }
-
-    public function testCanGetAllPastEpisodesMinusLatest()
-    {
-        /** @var vfsStreamDirectory $directory */
-        vfsStream::setup('root', null, $this->structure);
-
-        $itemLister = new ItemListerFilesystem(vfsStream::url('root/posts'), new Parser());
-
-        $this->assertTrue(
-            count($itemLister->getPastItems(false)) == 1,
-            "Incorrect past item count retrieved"
-        );
-    }
-
-    public function testCanFilterLatestEpisodes()
-    {
-        /** @var vfsStreamDirectory $directory */
-        vfsStream::setup('root', null, $this->structure);
-
-        $itemLister = new ItemListerFilesystem(vfsStream::url('root/posts'), new Parser());
-
-        $this->assertInstanceOf(
-            BlogArticle::class,
-            $itemLister->getLatestItem(),
-            "Incorrect past item count retrieved"
-        );
+        $this->assertCount(2, $publishedItems, "Incorrect past item count retrieved");
     }
 }

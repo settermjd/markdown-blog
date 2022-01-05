@@ -8,12 +8,12 @@ use DirectoryIterator;
 use SplFileInfo;
 
 /**
- * Class CurrentItemFilterIterator.
+ * Class MarkdownFileFilterIterator.
  *
  * @author Matthew Setter <matthew@matthewsetter.com>
  * @copyright 2021 Matthew Setter
  */
-class CurrentItemFilterIterator extends \FilterIterator
+class MarkdownFileFilterIterator extends \FilterIterator
 {
     public function __construct(DirectoryIterator $iterator)
     {

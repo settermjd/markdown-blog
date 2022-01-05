@@ -1,18 +1,13 @@
 ---
 publish_date: 21.12.2015 15:00
-slug: episode-0011
+slug: blogArticle-0011
 title: Item 11 - The Life of a Developer Evangelist, with Developer Jack
-fileSize: 46726768
-fileType: audio/x-mp3
-duration: 43:11
-explicit: no
-link: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0011.mp3
-download: FreeTheGeek-Episode0011.mp3
-guests:
-  “Jack Skinner”:
-    email: jack@developerjack.com
-    twitter: @developerjack
-
+image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0011.mp3
+categories:
+  - software development
+tags:
+  - PHP
+  - Docker
 ---
 ### Synopsis
 
