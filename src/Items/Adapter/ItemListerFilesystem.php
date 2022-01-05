@@ -92,8 +92,6 @@ class ItemListerFilesystem implements ItemListerInterface
             /** @var Document $document */
             $document = $this->fileParser->parse($fileContent, false);
             if ($document->getYAML()['slug'] === $episodeSlug) {
-                $episode = new BlogArticle($this->getEpisodeData($document));
-
                 return new BlogArticle($this->getEpisodeData($document));
             }
         }

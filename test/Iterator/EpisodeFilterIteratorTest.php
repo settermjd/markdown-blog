@@ -142,7 +142,6 @@ EOF;
         $item004Content = sprintf($item004Content, $futureDate);
 
         $this->root = vfsStream::setup();
-        // setup the directory structure
         $this->structure = [
             'posts' => [
                 'item-0001.md' => $item001Content,
