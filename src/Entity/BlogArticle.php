@@ -21,14 +21,12 @@ class BlogArticle
     public function __construct(array $options = [])
     {
         if (!empty($options)) {
-            $memberVariables = get_class_vars(__CLASS__);
+            $properties = get_class_vars(__CLASS__);
             foreach ($options as $key => $value) {
-                if (array_key_exists($key, $memberVariables) && !empty($value)) {
-                    if ($key === 'publishDate') {
-                       $this->$key = new \DateTime($value);
-                    } else {
-                        $this->$key = $value;
-                    }
+                if (array_key_exists($key, $properties) && !empty($value)) {
+                    $this->$key = ($key === 'publishDate')
+                        ? new \DateTime($value)
+                       : $value;
                 }
             }
         }
