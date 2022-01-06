@@ -26,7 +26,6 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
         ];
     }
 
@@ -39,18 +38,6 @@ class ConfigProvider
             'factories'  => [
                 ItemListerInterface::class => ItemListerFactory::class,
                 InputFilterInterface::class => BlogArticleInputFilterFactory::class,
-            ],
-        ];
-    }
-
-    /**
-     * Returns the templates configuration
-     */
-    public function getTemplates() : array
-    {
-        return [
-            'paths' => [
-                'markdown-blog'    => [__DIR__ . '/../templates/'],
             ],
         ];
     }
