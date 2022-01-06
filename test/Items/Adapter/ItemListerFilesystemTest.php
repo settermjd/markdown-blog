@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace MarkdownBlogTest\Items\Adapter;
 
-use MarkdownBlog\Entity\BlogArticle;
-use MarkdownBlog\Items\ItemListerFactory;
-use MarkdownBlog\Items\ItemListerInterface;
+use MarkdownBlog\InputFilter\BlogArticleInputFilterFactory;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 use MarkdownBlog\Items\Adapter\ItemListerFilesystem;
 use Mni\FrontYAML\Parser;
@@ -18,46 +18,151 @@ use Mni\FrontYAML\Parser;
  */
 class ItemListerFilesystemTest extends TestCase
 {
-    /**
-     * @covers ::buildEpisode
-     */
-    public function testAdapterCanProperlyBuildEpisodeObject()
+    protected function setUp(): void
     {
-        $filePath = __DIR__ . '/../../_data/posts';
-        $episodeLister = new ItemListerFilesystem($filePath, new Parser());
-
-        $content =<<<EOF
+        $item001Content = <<<EOF
+---
+publish_date: "2015"
+slug: item-0001
+title: Getting Underway, <a href="">The E-Myth Revisited</a>, and Networking For Success
+image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0001.mp3
+tags:
+  - "PHP"
+  - "Docker"
+categories:
+  - "Software Development"
+---
 ### Synopsis
 
-In this episode I have a fireside chat about what it’s like to live the life of a developer evangelist with Jack Skinner, otherwise known as @developerjack, whilst he was at the first BuzzConf. He talked with me about the crazy hours, random locations, shared some stories from the road, such as having a conference call whilst walking down the boarding gate to catch a flight.
+In this, the first item, Matt talks about what lead to the podcast getting started who motivated him and inspired him to get started. After that, he discusses a fantastic book that all freelancers should read.
 
-If you don’t, yet, know Jack, he’s a developer evangelist at MYOB, which is an Australian software development company specialising in accounting and business management software, the market leader I believe. He shared so much gold in this chat that I’m itching to share it with you. Here’s a summary of the key things he said.
-
-- An evangelist works closely with the community
-- He helps developers build awesome software, preferably with our (MYOB’s) platform
-- You’re always still learning
-- Be really passionate
-- Be passionate about one particular thing and grow it from there
-- Speak from the heart about what you love
-
-He’s a very warm, genuine, and passionate person, so I know you’re going to love this episode.
+It's one which explains how you need to approach freelancing if you want to succeed, and you want to keep your sanity; it's called the E-Myth Revisited. Finally, Matt discusses why networking is essential to success, and some of the mistakes that some of techies make.
 
 ### Related Links
 
+- [The E-Myth Revisited by Michael E. Gerber](http://www.amazon.co.uk/The-E-Myth-Revisited-Michael-Gerber-ebook/dp/B000RO9VJK)
+- [How to Network – Even if You’re Self-Conscious](http://www.matthewsetter.com/how-to-network-even-if-you-are-self-conscious/)
+
+> **Correction:** Thanks to [@asgrim](https://twitter.com/@asgrim) for correcting me about employers rarely, if ever, paying for flights and hotels when sending staff to conferences. That was a slip up on my part. I'd only meant to say that they cover the costs of the ticket.
 EOF;
 
-        $this->assertEquals($episodeLister->getDataDirectory(), __DIR__ . '/../../_data/posts');
-        $itemList = $episodeLister->getItemList();
-        $this->assertCount(2, $itemList);
-        $blogArticle = $itemList[1];
-        $this->assertInstanceOf(BlogArticle::class, $blogArticle, 'Built blogArticle is not an BlogArticle instance');
-        $this->assertNotNull($blogArticle, 'BlogArticle entity should have been initialised');
-        $this->assertEquals('blogArticle-0011', $blogArticle->getSlug());
-        $this->assertEquals(new \DateTime('21.12.2015 15:00'), $blogArticle->getPublishDate());
-        $this->assertEquals(
-            'Item 11 - The Life of a Developer Evangelist, with Developer Jack',
-            $blogArticle->getTitle()
-        );
-        $this->assertEquals($content, $blogArticle->getContent());
+        $item002Content = <<<EOF
+---
+publish_date: 03.08.2015
+slug: item-0002
+title: The Mythical Man Month with Paul M. Jones & Speaking Engagements
+image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0002.mp3
+tags:
+  - "PHP"
+  - "Docker"
+categories:
+  - "Software Development"
+---
+### Synopsis
+
+In this item, I have a fireside chat with internationally recognized PHP expert, and all around good fella [Paul M. Jones](http://paul-m-jones.com), about one of his all-time favorite books - [The Mythical Man Month](http://www.amazon.co.uk/The-Mythical-Man-month-Software-Engineering/dp/0201835959).
+
+We talk about why the book is so valuable to him, how it's helped shape his career over the years, and the lessons it can teach all of us as software developers, lessons still relevant over 50 years after it was first published, in 1975.
+
+I've also got updates on what's been happening for me personally in my freelancing business; including speaking at php[world], attending the inaugural PHP South Coast, **and much, much more**.
+
+### Related Links
+
+- [Paul M. Jones](http://paul-m-jones.com/)
+- [Modernizing Legacy Applications in PHP](http://mlaphp.com/)
+- [Solving the N+1 Problem in PHP](https://leanpub.com/sn1php?utm_campaign=sn1php&utm_medium=embed&utm_source=paul-m-jones.com)
+- [The Action Domain Responder Pattern](http://pmjones.io/adr/)
+- [The Mythical Man Month, by Frederick P. Brooks. Jr](http://www.amazon.co.uk/The-Mythical-Man-month-Software-Engineering/dp/0201835959)
+- [Peopleware: Productive Projects and Teams](http://www.amazon.co.uk/Peopleware-Productive-Projects-Tom-DeMarco/dp/0932633439)
+- [The Inmates are Running the Asylum](http://www.amazon.co.uk/The-Inmates-are-Running-Asylum/dp/0672326140)
+- [Outliers by Malcolm Gladwell](http://gladwell.com/outliers/)
+- [PHP South Coast Conference](http://2015.phpsouthcoast.co.uk/)
+- [PHP[World] Conference](http://world.phparch.com)
+- [Nomad PHP](https://nomadphp.com)
+EOF;
+
+        $item003Content = <<<EOF
+---
+publish_date: %s
+slug: item-0003
+title: The Mythical Man Month with Paul M. Jones & Speaking Engagements
+image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0002.mp3
+tags:
+  - "PHP"
+  - "Docker"
+categories:
+  - "Software Development"
+---
+### Synopsis
+
+In this item, I have a fireside chat with internationally recognized PHP expert, and all around good fella [Paul M. Jones](http://paul-m-jones.com), about one of his all-time favorite books - [The Mythical Man Month](http://www.amazon.co.uk/The-Mythical-Man-month-Software-Engineering/dp/0201835959).
+
+We talk about why the book is so valuable to him, how it's helped shape his career over the years, and the lessons it can teach all of us as software developers, lessons still relevant over 50 years after it was first published, in 1975.
+
+I've also got updates on what's been happening for me personally in my freelancing business; including speaking at php[world], attending the inaugural PHP South Coast, **and much, much more**.
+
+### Related Links
+
+- [Paul M. Jones](http://paul-m-jones.com/)
+EOF;
+
+        $futureDate = (new \DateTime())->add(new \DateInterval('P3D'))->format('d.m.Y');
+        $item003Content = sprintf($item003Content, $futureDate);
+
+        $item004Content = <<<EOF
+---
+publish_date: %s
+slug: item-0004
+title: Wisdom as a Service World Tour and Human Skills - with Yitzchok Willroth
+image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0004.mp3
+tags:
+  - "PHP"
+  - "Docker"
+categories:
+  - "Software Development"
+---
+### Synopsis
+
+In this item, I have a fireside chat with Yitzchok Willroth, the one and only [coderabbi](https://twitter.com/@coderabbi), about a his [Wisdom as a Service World Tour](http://wisdomworldtour.com/).
+
+We talk about what it's like to run the tour, the time involved, the energy required, and how it's been received. We also talk about the value of human skills (otherwise known as soft skills), the value of getting up and sharing your knowledge with the community, via public speaking, **and much, much more**.
+
+### Related Links
+
+- [Wisdom as a Service World Tour](http://wisdomworldtour.com/)
+- [coderabbi](https://twitter.com/@coderabbi)
+- [ShorePHP User Group](http://shorephp.org/)
+- [NYPHP User Group](http://nyphp.org/)
+EOF;
+
+        $futureDate = (new \DateTime())->add(new \DateInterval('P5D'))->format('d.m.Y');
+        $item004Content = sprintf($item004Content, $futureDate);
+
+        $this->root = vfsStream::setup();
+        $this->structure = [
+            'posts' => [
+                'item-0001.md' => $item001Content,
+                'item-0002.md' => $item002Content,
+                'item-0003.md' => $item003Content,
+                'item-0004.md' => $item004Content,
+            ],
+        ];
     }
+
+    public function testDataIsProperlyValidatedAndFiltered()
+    {
+        /** @var vfsStreamDirectory $directory */
+        vfsStream::setup('root', null, $this->structure);
+
+        $blogArticleInputFilterFactory = new BlogArticleInputFilterFactory();
+        $itemLister = new ItemListerFilesystem(
+            vfsStream::url('root/posts'),
+            new Parser(),
+            $blogArticleInputFilterFactory()
+        );
+
+        $articles = $itemLister->getArticles();
+        $this->assertCount(3, $articles);
+    }
+
 }

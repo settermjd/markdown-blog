@@ -20,14 +20,17 @@ class BlogArticle
 
     public function __construct(array $options = [])
     {
-        if (!empty($options)) {
-            $properties = get_class_vars(__CLASS__);
-            foreach ($options as $key => $value) {
-                if (array_key_exists($key, $properties) && !empty($value)) {
-                    $this->$key = ($key === 'publishDate')
-                        ? new \DateTime($value)
-                       : $value;
-                }
+        $this->populate($options);
+    }
+
+    public function populate(array $options = [])
+    {
+        $properties = get_class_vars(__CLASS__);
+        foreach ($options as $key => $value) {
+            if (array_key_exists($key, $properties) && !empty($value)) {
+                $this->$key = ($key === 'publishDate')
+                    ? new \DateTime($value)
+                    : $value;
             }
         }
     }

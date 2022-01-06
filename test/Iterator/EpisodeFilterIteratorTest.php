@@ -6,14 +6,13 @@ namespace MarkdownBlogTest;
 
 use ArrayIterator;
 use MarkdownBlog\Entity\BlogArticle;
+use MarkdownBlog\InputFilter\BlogArticleInputFilterFactory;
 use MarkdownBlog\Items\Adapter\ItemListerFilesystem;
 use MarkdownBlog\Iterator\PublishedItemFilterIterator;
 use MarkdownBlog\Iterator\UpcomingItemFilterIterator;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
-use PodcastSite\Episodes\EpisodeLister;
-use PodcastSite\Iterator\PastEpisodeFilterIterator;
 use Mni\FrontYAML\Parser;
 
 class EpisodeFilterIteratorTest extends TestCase
@@ -157,7 +156,12 @@ EOF;
         /** @var vfsStreamDirectory $directory */
         vfsStream::setup('root', null, $this->structure);
 
-        $itemLister = new ItemListerFilesystem(vfsStream::url('root/posts'), new Parser());
+        $blogArticleInputFilterFactory = new BlogArticleInputFilterFactory();
+        $itemLister = new ItemListerFilesystem(
+            vfsStream::url('root/posts'),
+            new Parser(),
+            $blogArticleInputFilterFactory()
+        );
         $upcomingItems = new UpcomingItemFilterIterator(
             new ArrayIterator(
                 $itemLister->getArticles()
@@ -178,7 +182,12 @@ EOF;
         /** @var vfsStreamDirectory $directory */
         vfsStream::setup('root', null, $this->structure);
 
-        $itemLister = new ItemListerFilesystem(vfsStream::url('root/posts'), new Parser());
+        $blogArticleInputFilterFactory = new BlogArticleInputFilterFactory();
+        $itemLister = new ItemListerFilesystem(
+            vfsStream::url('root/posts'),
+            new Parser(),
+            $blogArticleInputFilterFactory()
+        );
         $publishedItems = new PublishedItemFilterIterator(
             new ArrayIterator(
                 $itemLister->getArticles()

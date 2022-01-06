@@ -41,6 +41,8 @@
         "laminas/laminas-component-installer": "^2.5.0",
         "laminas/laminas-config-aggregator": "^1.5.0",
         "laminas/laminas-diactoros": "^2.6.0",
+        "laminas/laminas-hydrator": "^4.3",
+        "laminas/laminas-inputfilter": "^2.13",
         "laminas/laminas-servicemanager": "^3.4",
         "laminas/laminas-stdlib": "^3.3.1",
         "laminas/laminas-zendframework-bridge": "^1.2.0",

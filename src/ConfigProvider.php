@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace MarkdownBlog;
 
+use Laminas\InputFilter\InputFilterInterface;
+use MarkdownBlog\InputFilter\BlogArticleInputFilterFactory;
 use MarkdownBlog\Items\ItemListerFactory;
 use MarkdownBlog\Items\ItemListerInterface;
 
@@ -35,7 +37,8 @@ class ConfigProvider
     {
         return [
             'factories'  => [
-                ItemListerInterface::class => ItemListerFactory::class
+                ItemListerInterface::class => ItemListerFactory::class,
+                InputFilterInterface::class => BlogArticleInputFilterFactory::class,
             ],
         ];
     }

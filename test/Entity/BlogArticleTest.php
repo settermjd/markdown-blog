@@ -17,7 +17,8 @@ class BlogArticleTest extends TestCase
      */
     public function testCanHydrateBlogArticleCorrectly(array $input, array $output)
     {
-        $blogArticle = new BlogArticle($input);
+        $blogArticle = new BlogArticle();
+        $blogArticle->populate($input);
 
         $this->assertEquals(new \DateTime($input['publishDate']), $blogArticle->getPublishDate());
         $this->assertEquals($output['slug'], $blogArticle->getSlug());
@@ -159,30 +160,8 @@ EOF,
             ],
             [
                 [
-                    "publishDate" => null,
-                    "slug" => null,
-                    "title" => null,
-                    "content" => null,
-                    "synopsis" => null,
-                    "image" => null,
-                    'tags' => null,
-                    'categories' => null,
-                ],
-                [
-                    "publishDate" => null,
-                    "slug" => '',
-                    "title" => '',
-                    "content" => '',
-                    "synopsis" => '',
-                    "image" => '',
-                    'tags' => [],
-                    'categories' => [],
-                ]
-            ],
-            [
-                [
                     "publishDate" => "2015-01-01",
-                    "slug" => "<a href=''>blogArticle-001</a>",
+                    "slug" => "blogArticle-001",
                     "title" => "BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001",
                     "content" => <<<EOF
 ### Related Links

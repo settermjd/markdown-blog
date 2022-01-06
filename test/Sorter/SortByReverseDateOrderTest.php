@@ -18,16 +18,28 @@ class SortByReverseDateOrderTest extends TestCase
      */
     public function testResultsAreSortedInTheCorrectOrder()
     {
-        $itemListing = [
-            new BlogArticle([
+        $blogArticle1 = new BlogArticle();
+        $blogArticle1->populate(
+            [
                 'publishDate' => '2013-01-01'
-            ]),
-            new BlogArticle([
+            ]
+        );
+        $blogArticle2 = new BlogArticle();
+        $blogArticle2->populate(
+            [
                 'publishDate' => '2015-01-01'
-            ]),
-            new BlogArticle([
+            ]
+        );
+        $blogArticle3 = new BlogArticle();
+        $blogArticle3->populate(
+            [
                 'publishDate' => '2014-01-01'
-            ]),
+            ]
+        );
+        $itemListing = [
+            $blogArticle1,
+            $blogArticle2,
+            $blogArticle3,
         ];
 
         $sorter = new SortByReverseDateOrder();

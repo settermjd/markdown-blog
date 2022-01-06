@@ -3,10 +3,13 @@
 namespace MarkdownBlog\Items\Adapter;
 
 use DirectoryIterator;
+use Laminas\Hydrator\ArraySerializableHydrator;
+use Laminas\InputFilter\InputFilterInterface;
 use MarkdownBlog\Items\ItemListerInterface;
 use MarkdownBlog\Iterator\MarkdownFileFilterIterator;
 use MarkdownBlog\Entity\BlogArticle;
 use Mni\FrontYAML\Document;
+use Mni\FrontYAML\Parser;
 use Traversable;
 
 /**
@@ -23,12 +26,17 @@ class ItemListerFilesystem implements ItemListerInterface
     public const CACHE_KEY_SUFFIX_PAST = 'past';
 
     protected string $postDirectory;
-    protected object $fileParser;
+    private InputFilterInterface $inputFilter;
+    protected Parser $fileParser;
     protected MarkdownFileFilterIterator $episodeIterator;
     protected ?object $cache = null;
 
-    public function __construct(string $postDirectory, object $fileParser, $cache = null)
-    {
+    public function __construct(
+        string $postDirectory,
+        Parser $fileParser,
+        InputFilterInterface $inputFilter,
+        $cache = null
+    ) {
         $this->postDirectory = $postDirectory;
         $this->fileParser = $fileParser;
 
@@ -39,12 +47,11 @@ class ItemListerFilesystem implements ItemListerInterface
         $this->episodeIterator = new MarkdownFileFilterIterator(
             new DirectoryIterator($this->postDirectory)
         );
+        $this->inputFilter = $inputFilter;
     }
 
     /**
-     * Return the current available items.
-     *
-     * @return array|Traversable
+     * Return the available articles.
      */
     public function getArticles($cacheKeySuffix = self::CACHE_KEY_SUFFIX_ALL): array
     {
@@ -65,7 +72,10 @@ class ItemListerFilesystem implements ItemListerInterface
     {
         $episodeListing = [];
         foreach ($this->episodeIterator as $file) {
-            $episodeListing[] = $this->buildEpisode($file);
+            $article = $this->buildArticleFromFile($file);
+            if (! is_null($article)) {
+                $episodeListing[] = $article;
+            }
         }
 
         return $episodeListing;
@@ -110,7 +120,11 @@ class ItemListerFilesystem implements ItemListerInterface
             return null;
         }
 
-        return new BlogArticle($this->getEpisodeData($document));
+        return (new ArraySerializableHydrator())
+            ->hydrate(
+                $this->inputFilter->getValues(),
+                new BlogArticle()
+            );
     }
 
     public function getArticleData(Document $document): array
