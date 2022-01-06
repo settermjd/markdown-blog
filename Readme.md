@@ -21,7 +21,7 @@ $itemLister = new \MarkdownBlog\Items\Adapter\ItemListerFilesystem(
 );
 
 /** @var \MarkdownBlog\Entity\BlogArticle $item */
-$items = $itemLister->getItemList();
+$items = $itemLister->getArticles();
 ```
 
 ### Use as part of a framework
@@ -57,5 +57,5 @@ Then, use it as in the standalone version above, such as in the example below.
 
 ```php
 /** @var \MarkdownBlog\Entity\BlogArticle $item */
-$items = $itemLister->getItemList();
+$items = $itemLister->getArticles();
 ```

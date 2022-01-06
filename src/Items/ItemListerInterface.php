@@ -12,6 +12,6 @@ namespace MarkdownBlog\Items;
  */
 interface ItemListerInterface
 {
-    public function getItem(string $episodeSlug);
-    public function getItemList();
+    public function getArticle(string $episodeSlug);
+    public function getArticles();
 }

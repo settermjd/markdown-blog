@@ -46,22 +46,22 @@ class ItemListerFilesystem implements ItemListerInterface
      *
      * @return array|Traversable
      */
-    public function getItemList($cacheKeySuffix = self::CACHE_KEY_SUFFIX_ALL): array
+    public function getArticles($cacheKeySuffix = self::CACHE_KEY_SUFFIX_ALL): array
     {
         if ($this->cache) {
             $cacheKey = self::CACHE_KEY_EPISODES_LIST.$cacheKeySuffix;
             $result = $this->cache->getItem($cacheKey);
             if (!$result) {
-                $result = $this->buildEpisodesList();
+                $result = $this->buildArticlesList();
                 $this->cache->setItem($cacheKey, $result);
             }
             return $result;
         }
 
-        return $this->buildEpisodesList();
+        return $this->buildArticlesList();
     }
 
-    protected function buildEpisodesList(): array
+    protected function buildArticlesList(): array
     {
         $episodeListing = [];
         foreach ($this->episodeIterator as $file) {
@@ -85,31 +85,35 @@ class ItemListerFilesystem implements ItemListerInterface
     /**
      * @return BlogArticle|string
      */
-    public function getItem($episodeSlug)
+    public function getArticle($episodeSlug)
     {
         foreach ($this->episodeIterator as $file) {
-            $fileContent = file_get_contents($file->getPathname());
-            /** @var Document $document */
-            $document = $this->fileParser->parse($fileContent, false);
-            if ($document->getYAML()['slug'] === $episodeSlug) {
-                return new BlogArticle($this->getEpisodeData($document));
+            $article ??= $this->buildArticleFromFile($file);
+            if (! is_null($article) && $article->getSlug() === $episodeSlug) {
+                return $article;
             }
         }
 
         return '';
     }
 
-    public function buildEpisode(\SplFileInfo $file): BlogArticle
+    public function buildArticleFromFile(\SplFileInfo $file): ?BlogArticle
     {
         $fileContent = file_get_contents($file->getPathname());
 
         /** @var Document $document */
         $document = $this->fileParser->parse($fileContent, false);
+        $articleData = $this->getArticleData($document);
+
+        $this->inputFilter->setData($articleData);
+        if (! $this->inputFilter->isValid()) {
+            return null;
+        }
 
         return new BlogArticle($this->getEpisodeData($document));
     }
 
-    public function getEpisodeData(Document $document): array
+    public function getArticleData(Document $document): array
     {
         return [
             'publishDate' => $document->getYAML()['publish_date'] ?? '',

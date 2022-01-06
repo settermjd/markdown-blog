@@ -160,7 +160,7 @@ EOF;
         $itemLister = new ItemListerFilesystem(vfsStream::url('root/posts'), new Parser());
         $upcomingItems = new UpcomingItemFilterIterator(
             new ArrayIterator(
-                $itemLister->getItemList()
+                $itemLister->getArticles()
             )
         );
         $this->assertCount(
@@ -181,7 +181,7 @@ EOF;
         $itemLister = new ItemListerFilesystem(vfsStream::url('root/posts'), new Parser());
         $publishedItems = new PublishedItemFilterIterator(
             new ArrayIterator(
-                $itemLister->getItemList()
+                $itemLister->getArticles()
             )
         );
         $this->assertCount(2, $publishedItems, "Incorrect past item count retrieved");
