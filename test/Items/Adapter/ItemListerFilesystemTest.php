@@ -26,6 +26,7 @@ publish_date: "2015"
 slug: item-0001
 title: Getting Underway, <a href="">The E-Myth Revisited</a>, and Networking For Success
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0001.mp3
+synopsis: In this, the first item, Matt talks about what lead to the podcast getting started who motivated him and inspired him to get started. After that, he discusses a fantastic book that all freelancers should read.
 tags:
   - "PHP"
   - "Docker"
@@ -52,6 +53,7 @@ publish_date: 03.08.2015
 slug: item-0002
 title: The Mythical Man Month with Paul M. Jones & Speaking Engagements
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0002.mp3
+synopsis: In this item, I have a fireside chat with internationally recognized PHP expert, and all around good fella Paul M. Jones, about one of his all-time favorite books, The Mythical Man Month.
 tags:
   - "PHP"
   - "Docker"
@@ -87,6 +89,7 @@ publish_date: %s
 slug: item-0003
 title: The Mythical Man Month with Paul M. Jones & Speaking Engagements
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0002.mp3
+synopsis: In this item, I have a fireside chat with internationally recognized PHP expert, and all around good fella Paul M. Jones, about one of his all-time favorite books, The Mythical Man Month.
 tags:
   - "PHP"
   - "Docker"
@@ -115,6 +118,7 @@ publish_date: %s
 slug: item-0004
 title: Wisdom as a Service World Tour and Human Skills - with Yitzchok Willroth
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0004.mp3
+synopsis: In this item, I have a fireside chat with Yitzchok Willroth, the one and only coderabbi, about a his Wisdom as a Service World Tour.
 tags:
   - "PHP"
   - "Docker"

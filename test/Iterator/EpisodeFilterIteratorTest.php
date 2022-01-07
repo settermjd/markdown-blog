@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MarkdownBlogTest;
+namespace MarkdownBlogTest\Iterator;
 
 use ArrayIterator;
-use MarkdownBlog\Entity\BlogArticle;
 use MarkdownBlog\InputFilter\BlogArticleInputFilterFactory;
 use MarkdownBlog\Items\Adapter\ItemListerFilesystem;
 use MarkdownBlog\Iterator\PublishedItemFilterIterator;
@@ -26,6 +25,7 @@ class EpisodeFilterIteratorTest extends TestCase
 ---
 publish_date: 13.07.2015
 slug: item-0001
+synopsis: In this, the first item, Matt talks about what lead to the podcast getting started who motivated him and inspired him to get started. After that, he discusses a fantastic book that all freelancers should read.
 title: Getting Underway, The E-Myth Revisited, and Networking For Success
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0001.mp3
 tags:
@@ -53,6 +53,7 @@ EOF;
 publish_date: 03.08.2015
 slug: item-0002
 title: The Mythical Man Month with Paul M. Jones & Speaking Engagements
+synopsis: In this blogArticle, I have a fireside chat with internationally recognized PHP expert Paul M. Jones about one of his all-time favorite books, The Mythical Man Month.
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0002.mp3
 tags:
   - "PHP"
@@ -87,6 +88,7 @@ EOF;
 ---
 publish_date: %s
 slug: item-0003
+synopsis: In this blogArticle, I have a fireside chat with internationally recognized PHP expert Paul M. Jones about one of his all-time favorite books, The Mythical Man Month.
 title: The Mythical Man Month with Paul M. Jones & Speaking Engagements
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0002.mp3
 tags:
@@ -116,6 +118,7 @@ EOF;
 publish_date: %s
 slug: item-0004
 title: Wisdom as a Service World Tour and Human Skills - with Yitzchok Willroth
+synopsis: In this item, I have a fireside chat with Yitzchok Willroth, the one and only coderabbi, about a his Wisdom as a Service World Tour.
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0004.mp3
 tags:
   - "PHP"

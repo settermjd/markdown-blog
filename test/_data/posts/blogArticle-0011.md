@@ -1,6 +1,7 @@
 ---
 publish_date: 21.12.2015 15:00
 slug: blogArticle-0011
+synopsis: In this episode I have a fireside chat about what it’s like to live the life of a developer evangelist with Jack Skinner, otherwise known as @developerjack.
 title: Item 11 - The Life of a Developer Evangelist, with Developer Jack
 image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0011.mp3
 categories:

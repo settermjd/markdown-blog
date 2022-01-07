@@ -22,6 +22,7 @@ class BlogArticleTest extends TestCase
 
         $this->assertEquals(new \DateTime($input['publishDate']), $blogArticle->getPublishDate());
         $this->assertEquals($output['slug'], $blogArticle->getSlug());
+        $this->assertEquals($output['synopsis'], $blogArticle->getSynopsis());
         $this->assertEquals($output['title'], $blogArticle->getTitle());
         $this->assertEquals($output['content'], $blogArticle->getContent());
         $this->assertEquals($output['image'], $blogArticle->getImage());

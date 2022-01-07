@@ -132,6 +132,7 @@ class ItemListerFilesystem implements ItemListerInterface
         return [
             'publishDate' => $document->getYAML()['publish_date'] ?? '',
             'slug' => $document->getYAML()['slug'] ?? '',
+            'synopsis' => $document->getYAML()['synopsis'] ?? '',
             'title' => $document->getYAML()['title'] ?? '',
             'image' => $document->getYAML()['image'] ?? '',
             'categories' => $document->getYAML()['categories'] ?? [],

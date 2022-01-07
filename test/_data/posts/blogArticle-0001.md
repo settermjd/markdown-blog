@@ -1,6 +1,7 @@
 ---
 publish_date: 13.07.2015
 slug: episode-0001
+synopsis: In this blogArticle, I have a fireside chat with internationally recognized PHP expert Paul M. Jones about one of his all-time favorite books, The Mythical Man Month.
 title: Item 1 - Getting Underway, The E-Myth Revisited, and Networking For Success
 categories: 
   - software development
