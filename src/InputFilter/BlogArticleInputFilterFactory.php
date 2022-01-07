@@ -33,7 +33,6 @@ class BlogArticleInputFilterFactory
             ->attach(new StringLength(8));
         $publishDate
             ->getFilterChain()
-            ->attach(new HtmlEntities())
             ->attach(new StringTrim())
             ->attach(new StripNewlines())
             ->attach(new StripTags());
@@ -51,7 +50,6 @@ class BlogArticleInputFilterFactory
         $slug = new Input('slug');
         $slug
             ->getFilterChain()
-            ->attach(new HtmlEntities())
             ->attach(new StringTrim())
             ->attach(new StripNewlines())
             ->attach(new StripTags());
@@ -59,7 +57,6 @@ class BlogArticleInputFilterFactory
         $title = new Input('title');
         $title
             ->getFilterChain()
-            ->attach(new HtmlEntities())
             ->attach(new StringTrim())
             ->attach(new StripNewlines())
             ->attach(new StripTags());
@@ -67,7 +64,6 @@ class BlogArticleInputFilterFactory
         $image = new Input('image');
         $image
             ->getFilterChain()
-            ->attach(new HtmlEntities())
             ->attach(new StringTrim())
             ->attach(new StripNewlines())
             ->attach(new StripTags());
@@ -75,7 +71,6 @@ class BlogArticleInputFilterFactory
         $content = new Input('content');
         $content
             ->getFilterChain()
-            ->attach(new HtmlEntities())
             ->attach(new StringTrim())
             ->attach(new StripTags());
 

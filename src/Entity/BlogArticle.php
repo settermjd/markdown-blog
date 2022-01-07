@@ -6,6 +6,7 @@ namespace MarkdownBlog\Entity;
 
 use DateTime;
 use MarkdownBlog\Entity\Traits\GetExplicit;
+use Michelf\MarkdownExtra;
 
 class BlogArticle
 {
@@ -60,7 +61,8 @@ class BlogArticle
 
     public function getContent(): string
     {
-        return $this->content;
+        $markdownParser = new MarkdownExtra();
+        return $markdownParser->defaultTransform($this->content);
     }
 
     public function getTags(): array
