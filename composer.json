@@ -21,7 +21,11 @@
         "rss": "https://github.com/settermjd/mezzio-markdown-blog/releases.atom"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "laminas/laminas-component-installer": true
+        }
     },
     "extra": {
         "laminas": {
