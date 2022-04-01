@@ -98,7 +98,7 @@ class ItemListerFilesystem implements ItemListerInterface
     public function getArticle($episodeSlug)
     {
         foreach ($this->episodeIterator as $file) {
-            $article ??= $this->buildArticleFromFile($file);
+            $article = $this->buildArticleFromFile($file);
             if (! is_null($article) && $article->getSlug() === $episodeSlug) {
                 return $article;
             }

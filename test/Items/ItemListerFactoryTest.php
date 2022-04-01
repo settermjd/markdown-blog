@@ -23,7 +23,7 @@ class ItemListerFactoryTest extends TestCase
         $config = [
             'blog' => [
                 'type' => 'filesystem',
-                'path' => __DIR__ . '/../../data/posts',
+                'path' => __DIR__ . '/../_data/posts',
                 'parser' => new Parser(),
             ]
         ];
@@ -42,5 +42,32 @@ class ItemListerFactoryTest extends TestCase
         $factory = new ItemListerFactory();
         $itemLister = $factory($container->reveal());
         $this->assertInstanceOf(ItemListerFilesystem::class, $itemLister);
+    }
+
+    public function testThrowsExceptionIfTestDirectoryIsNotAvailableOrUsable()
+    {
+        $this->expectException(\UnexpectedValueException::class);
+
+        $config = [
+            'blog' => [
+                'type' => 'filesystem',
+                'path' => __DIR__ . '/../data/posts',
+                'parser' => new Parser(),
+            ]
+        ];
+
+        /** @var ContainerInterface|ObjectProphecy $container */
+        $container = $this->prophesize(ContainerInterface::class);
+        $container
+            ->get('config')
+            ->willReturn($config);
+
+        $inputFilter = $this->prophesize(InputFilterInterface::class);
+        $container
+            ->get(InputFilterInterface::class)
+            ->willReturn($inputFilter->reveal());
+
+        $factory = new ItemListerFactory();
+        $factory($container->reveal());
     }
 }
