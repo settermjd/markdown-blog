@@ -71,8 +71,7 @@ class BlogArticleInputFilterFactory
         $content = new Input('content');
         $content
             ->getFilterChain()
-            ->attach(new StringTrim())
-            ->attach(new StripTags());
+            ->attach(new StringTrim());
 
         return (new InputFilter())
             ->add($publishDate)
