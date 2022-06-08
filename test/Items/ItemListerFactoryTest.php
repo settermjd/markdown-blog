@@ -24,7 +24,7 @@ class ItemListerFactoryTest extends TestCase
             'blog' => [
                 'type' => 'filesystem',
                 'path' => __DIR__ . '/../_data/posts',
-                'parser' => new Parser(),
+                'parser' => Parser::class,
             ]
         ];
 
@@ -33,6 +33,9 @@ class ItemListerFactoryTest extends TestCase
         $container
             ->get('config')
             ->willReturn($config);
+        $container
+            ->get(Parser::class)
+            ->willReturn(new Parser());
 
         $inputFilter = $this->prophesize(InputFilterInterface::class);
         $container
@@ -52,7 +55,7 @@ class ItemListerFactoryTest extends TestCase
             'blog' => [
                 'type' => 'filesystem',
                 'path' => __DIR__ . '/../data/posts',
-                'parser' => new Parser(),
+                'parser' => Parser::class,
             ]
         ];
 
@@ -61,6 +64,9 @@ class ItemListerFactoryTest extends TestCase
         $container
             ->get('config')
             ->willReturn($config);
+        $container
+            ->get(Parser::class)
+            ->willReturn(new Parser());
 
         $inputFilter = $this->prophesize(InputFilterInterface::class);
         $container

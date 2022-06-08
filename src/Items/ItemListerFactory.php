@@ -36,13 +36,14 @@ class ItemListerFactory
     {
         $config = $container->get('config')['blog'];
         $inputFilter = $container->get(InputFilterInterface::class);
+        $parser = $container->get($config['parser']);
 
         switch ($config['type']) {
             case 'filesystem':
             default:
                 return new ItemListerFilesystem(
                     $config['path'],
-                    $config['parser'],
+                    $parser,
                     $inputFilter,
                     (array_key_exists('cache', $config)) ? $config['cache'] : ''
                 );
