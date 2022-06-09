@@ -12,12 +12,6 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-/**
- * Class ItemListerFactory.
- *
- * @author Matthew Setter <matthew@matthewsetter.com>
- * @copyright 2021 Matthew Setter
- */
 class ItemListerFactory
 {
     /**

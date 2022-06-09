@@ -130,14 +130,14 @@ class ItemListerFilesystem implements ItemListerInterface
     public function getArticleData(Document $document): array
     {
         return [
+            'categories' => $document->getYAML()['categories'] ?? [],
+            'content' => $document->getContent(),
+            'image' => $document->getYAML()['image'] ?? '',
             'publishDate' => $document->getYAML()['publish_date'] ?? '',
             'slug' => $document->getYAML()['slug'] ?? '',
             'synopsis' => $document->getYAML()['synopsis'] ?? '',
-            'title' => $document->getYAML()['title'] ?? '',
-            'image' => $document->getYAML()['image'] ?? '',
-            'categories' => $document->getYAML()['categories'] ?? [],
             'tags' => $document->getYAML()['tags'] ?? [],
-            'content' => $document->getContent(),
+            'title' => $document->getYAML()['title'] ?? '',
         ];
     }
 }
