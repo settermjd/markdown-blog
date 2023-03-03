@@ -29,8 +29,7 @@ class BlogArticleInputFilterFactory
                              'format' => 'd.m.Y',
                              'strict' => true
                          ]
-                     ))
-            ->attach(new StringLength(8));
+                     ));
         $publishDate
             ->getFilterChain()
             ->attach(new StringTrim())
