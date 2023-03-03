@@ -10,10 +10,12 @@ use MarkdownBlog\InputFilter\BlogArticleInputFilterFactory;
 use MarkdownBlog\Items\Adapter\ItemListerFilesystem;
 use MarkdownBlog\Items\ItemListerFactory;
 use Mni\FrontYAML\Parser;
+use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 class ItemListerFactoryTest extends TestCase
 {
@@ -45,6 +47,14 @@ class ItemListerFactoryTest extends TestCase
         $container
             ->get(Parser::class)
             ->willReturn(new Parser());
+        $container
+            ->has(LoggerInterface::class)
+            ->willReturn(true);
+
+        $logger = $this->createMock(LoggerInterface::class);
+        $container
+            ->get(LoggerInterface::class)
+            ->willReturn($logger);
 
         $inputFilter = $this->prophesize(InputFilterInterface::class);
         $container
@@ -79,6 +89,9 @@ class ItemListerFactoryTest extends TestCase
         $container
             ->get(Parser::class)
             ->willReturn(new Parser());
+        $container
+            ->has(LoggerInterface::class)
+            ->willReturn(false);
 
         $inputFilter = $this->prophesize(InputFilterInterface::class);
         $container
@@ -109,6 +122,9 @@ class ItemListerFactoryTest extends TestCase
         $container
             ->get(Parser::class)
             ->willReturn(null);
+        $container
+            ->has(LoggerInterface::class)
+            ->willReturn(false);
 
         $inputFilter = $this->prophesize(InputFilterInterface::class);
         $container
@@ -138,6 +154,9 @@ class ItemListerFactoryTest extends TestCase
         $container
             ->get(Parser::class)
             ->willReturn(null);
+        $container
+            ->has(LoggerInterface::class)
+            ->willReturn(false);
 
         $inputFilter = $this->prophesize(InputFilterInterface::class);
         $container
@@ -188,6 +207,9 @@ class ItemListerFactoryTest extends TestCase
         $container
             ->get(InputFilterInterface::class)
             ->willReturn($inputFilter);
+        $container
+            ->has(LoggerInterface::class)
+            ->willReturn(false);
 
         $factory = new ItemListerFactory();
         $factory($container->reveal());

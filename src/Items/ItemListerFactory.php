@@ -11,6 +11,7 @@ use Mni\FrontYAML\Parser;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Psr\Log\LoggerInterface;
 
 class ItemListerFactory
 {
@@ -49,6 +50,9 @@ class ItemListerFactory
                 $blogConfig['parser']
             ));
         }
+        if ($container->has(LoggerInterface::class)) {
+            $logger = $container->get(LoggerInterface::class);
+        }
 
         switch ($blogConfig['type']) {
             case 'filesystem':
@@ -57,7 +61,8 @@ class ItemListerFactory
                     $blogConfig['path'],
                     $parser,
                     $inputFilter,
-                    (array_key_exists('cache', $blogConfig)) ? $blogConfig['cache'] : ''
+                    (array_key_exists('cache', $blogConfig)) ? $blogConfig['cache'] : '',
+                    $logger ?? null
                 );
         }
     }
