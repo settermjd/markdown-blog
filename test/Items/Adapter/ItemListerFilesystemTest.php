@@ -167,7 +167,7 @@ EOF;
                 'Could not instantiate blog item for file vfs://root/posts/item-0001.md.',
                 [
                     'publishDate' => [
-                        'dateInvalidDate' => 'The input does not appear to be a valid date'
+                        'regexNotMatch' => "The input does not match against pattern '/\d{4}\-\d{2}\-\d{2}|(\d{2}\.){2}\d{4}/'"
                     ]
                 ]
             );

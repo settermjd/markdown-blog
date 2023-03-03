@@ -15,6 +15,7 @@ use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\Date;
 use Laminas\Validator\IsCountable;
+use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
 class BlogArticleInputFilterFactory
@@ -24,10 +25,9 @@ class BlogArticleInputFilterFactory
         $publishDate = new Input('publishDate');
         $publishDate
             ->getValidatorChain()
-            ->attach(new Date(
+            ->attach(new Regex(
                          [
-                             'format' => 'd.m.Y',
-                             'strict' => true
+                             'pattern' => '/\d{4}\-\d{2}\-\d{2}|(\d{2}\.){2}\d{4}/',
                          ]
                      ));
         $publishDate
