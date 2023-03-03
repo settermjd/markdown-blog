@@ -10,6 +10,8 @@ use MarkdownBlog\Iterator\MarkdownFileFilterIterator;
 use MarkdownBlog\Entity\BlogArticle;
 use Mni\FrontYAML\Document;
 use Mni\FrontYAML\Parser;
+use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Traversable;
 
 /**
@@ -30,12 +32,14 @@ class ItemListerFilesystem implements ItemListerInterface
     protected Parser $fileParser;
     protected MarkdownFileFilterIterator $episodeIterator;
     protected ?object $cache = null;
+    private ?LoggerInterface $logger = null;
 
     public function __construct(
         string $postDirectory,
         Parser $fileParser,
         InputFilterInterface $inputFilter,
-        $cache = null
+        $cache = null,
+        LoggerInterface $logger = null
     ) {
         $this->postDirectory = $postDirectory;
         $this->fileParser = $fileParser;
@@ -48,6 +52,7 @@ class ItemListerFilesystem implements ItemListerInterface
             new DirectoryIterator($this->postDirectory)
         );
         $this->inputFilter = $inputFilter;
+        $this->logger = $logger;
     }
 
     /**
@@ -117,6 +122,12 @@ class ItemListerFilesystem implements ItemListerInterface
 
         $this->inputFilter->setData($articleData);
         if (! $this->inputFilter->isValid()) {
+            if ($this->logger instanceof LoggerInterface) {
+                $this->logger->error(
+                    sprintf('Could not instantiate blog item for file %s.', $file->getPathname()),
+                    $this->inputFilter->getMessages()
+                );
+            }
             return null;
         }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MarkdownBlogTest\Items\Adapter;
 
 use MarkdownBlog\InputFilter\BlogArticleInputFilterFactory;
+use Monolog\Logger;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
@@ -158,11 +159,26 @@ EOF;
         /** @var vfsStreamDirectory $directory */
         vfsStream::setup('root', null, $this->structure);
 
+        $log = $this->createMock(Logger::class);
+        $log
+            ->expects($this->once())
+            ->method('error')
+            ->with(
+                'Could not instantiate blog item for file vfs://root/posts/item-0001.md.',
+                [
+                    'publishDate' => [
+                        'dateInvalidDate' => 'The input does not appear to be a valid date'
+                    ]
+                ]
+            );
+
         $blogArticleInputFilterFactory = new BlogArticleInputFilterFactory();
         $itemLister = new ItemListerFilesystem(
             vfsStream::url('root/posts'),
             new Parser(),
-            $blogArticleInputFilterFactory()
+            $blogArticleInputFilterFactory(),
+            null,
+            $log
         );
 
         $articles = $itemLister->getArticles();
