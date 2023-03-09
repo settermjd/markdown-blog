@@ -53,6 +53,13 @@ class BlogArticleInputFilterFactory
             ->attach(new StripNewlines())
             ->attach(new StripTags());
 
+        $synopsis = new Input('synopsis');
+        $synopsis
+            ->getFilterChain()
+            ->attach(new StringTrim())
+            ->attach(new StripNewlines())
+            ->attach(new StripTags());
+
         $title = new Input('title');
         $title
             ->getFilterChain()
@@ -75,6 +82,7 @@ class BlogArticleInputFilterFactory
         return (new InputFilter())
             ->add($publishDate)
             ->add($slug)
+            ->add($synopsis)
             ->add($title)
             ->add($image)
             ->add($content)
