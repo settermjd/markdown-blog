@@ -59,7 +59,7 @@ tags:
   - "PHP"
   - "Docker"
 categories:
-  - "Software Development"
+  - "Public Speaking"
 ---
 ### Synopsis
 
@@ -152,6 +152,31 @@ EOF;
                 'item-0004.md' => $item004Content,
             ],
         ];
+    }
+
+    public function testCanRetrieveASortedUniqueListOfCategories()
+    {
+        /** @var vfsStreamDirectory $directory */
+        vfsStream::setup('root', null, $this->structure);
+
+        $blogArticleInputFilterFactory = new BlogArticleInputFilterFactory();
+        $itemLister = new ItemListerFilesystem(
+            vfsStream::url('root/posts'),
+            new Parser(),
+            $blogArticleInputFilterFactory(),
+            null,
+            null
+        );
+
+        $categories = $itemLister->getCategories();
+        $this->assertCount(2, $categories);
+        $this->assertSame(
+            [
+                'Public Speaking',
+                'Software Development'
+            ],
+            $categories,
+        );
     }
 
     public function testDataIsProperlyValidatedAndFiltered()

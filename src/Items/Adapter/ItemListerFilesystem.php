@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MarkdownBlog\Items\Adapter;
 
 use DirectoryIterator;
@@ -57,6 +59,8 @@ class ItemListerFilesystem implements ItemListerInterface
 
     /**
      * Return the available articles.
+     *
+     * @return array<int,BlogArticle>
      */
     public function getArticles($cacheKeySuffix = self::CACHE_KEY_SUFFIX_ALL): array
     {
@@ -73,6 +77,9 @@ class ItemListerFilesystem implements ItemListerInterface
         return $this->buildArticlesList();
     }
 
+    /**
+     * @return array<int,BlogArticle>
+     */
     protected function buildArticlesList(): array
     {
         $episodeListing = [];
@@ -124,7 +131,10 @@ class ItemListerFilesystem implements ItemListerInterface
         if (! $this->inputFilter->isValid()) {
             if ($this->logger instanceof LoggerInterface) {
                 $this->logger->error(
-                    sprintf('Could not instantiate blog item for file %s.', $file->getPathname()),
+                    sprintf(
+                        'Could not instantiate blog item for file %s.',
+                        $file->getPathname()
+                    ),
                     $this->inputFilter->getMessages()
                 );
             }
@@ -150,5 +160,22 @@ class ItemListerFilesystem implements ItemListerInterface
             'tags' => $document->getYAML()['tags'] ?? [],
             'title' => $document->getYAML()['title'] ?? '',
         ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCategories(): array
+    {
+        $categories = [];
+        $articles = $this->getArticles();
+        foreach ($articles as $article) {
+            if ($article instanceof BlogArticle) {
+                $categories = array_merge($categories, $article->getCategories());
+            }
+        }
+
+        sort($categories);
+        return array_unique($categories);
     }
 }

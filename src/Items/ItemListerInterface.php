@@ -14,4 +14,12 @@ interface ItemListerInterface
 {
     public function getArticle(string $episodeSlug);
     public function getArticles();
+
+    /**
+     * This function returns a unique and sorted scalar array of all categories
+     * referenced in the current items list.
+     *
+     * @return array<int,string>
+     */
+    public function getCategories(): array;
 }
