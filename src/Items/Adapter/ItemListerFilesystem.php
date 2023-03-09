@@ -178,4 +178,21 @@ class ItemListerFilesystem implements ItemListerInterface
         sort($categories);
         return array_unique($categories);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTags(): array
+    {
+        $tags = [];
+        $articles = $this->getArticles();
+        foreach ($articles as $article) {
+            if ($article instanceof BlogArticle) {
+                $tags = array_merge($tags, $article->getTags());
+            }
+        }
+
+        sort($tags);
+        return array_unique($tags);
+    }
 }

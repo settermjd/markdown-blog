@@ -22,4 +22,12 @@ interface ItemListerInterface
      * @return array<int,string>
      */
     public function getCategories(): array;
+
+    /**
+     * This function returns a unique and sorted scalar array of tags
+     * referenced in the current items list.
+     *
+     * @return array<int,string>
+     */
+    public function getTags(): array;
 }

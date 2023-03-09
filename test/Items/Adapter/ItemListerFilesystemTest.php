@@ -57,7 +57,9 @@ image: http://traffic.libsyn.com/thegeekyfreelancer/FreeTheGeek-Episode0002.mp3
 synopsis: In this item, I have a fireside chat with internationally recognized PHP expert, and all around good fella Paul M. Jones, about one of his all-time favorite books, The Mythical Man Month.
 tags:
   - "PHP"
-  - "Docker"
+  - "Paul M. Jones"
+  - "The Mythical Man Month"
+  - "Solving the N+1 Problem in PHP"
 categories:
   - "Public Speaking"
 ---
@@ -94,6 +96,7 @@ synopsis: In this item, I have a fireside chat with internationally recognized P
 tags:
   - "PHP"
   - "Docker"
+  - "PHP World"
 categories:
   - "Software Development"
 ---
@@ -176,6 +179,35 @@ EOF;
                 'Software Development'
             ],
             $categories,
+        );
+    }
+
+    public function testCanRetrieveASortedUniqueListOfTags()
+    {
+        /** @var vfsStreamDirectory $directory */
+        vfsStream::setup('root', null, $this->structure);
+
+        $blogArticleInputFilterFactory = new BlogArticleInputFilterFactory();
+        $itemLister = new ItemListerFilesystem(
+            vfsStream::url('root/posts'),
+            new Parser(),
+            $blogArticleInputFilterFactory(),
+            null,
+            null
+        );
+
+        $tags = $itemLister->getTags();
+        $this->assertCount(6, $tags);
+        $this->assertEqualsCanonicalizing(
+            [
+                "Docker",
+                "PHP",
+                "PHP World",
+                "Paul M. Jones",
+                "Solving the N+1 Problem in PHP",
+                "The Mythical Man Month",
+            ],
+            $tags,
         );
     }
 
