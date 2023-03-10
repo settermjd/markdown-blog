@@ -2,3 +2,4 @@
 config
 data
 vendor
+.phpunit.result.cache
