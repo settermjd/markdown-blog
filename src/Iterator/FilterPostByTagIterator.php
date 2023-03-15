@@ -21,7 +21,7 @@ class FilterPostByTagIterator extends \FilterIterator
      * Filter out articles that don't have a matching category.
      * A lowercase comparison is made to reduce the likelihood of false negative matches.
      */
-    public function accept()
+    public function accept(): bool
     {
         /** @var BlogArticle $post */
         $post = $this->getInnerIterator()->current();

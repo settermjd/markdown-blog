@@ -42,6 +42,8 @@ class BlogArticleInputFilterFactory
             ->attach(new IsCountable());
 
         $tags = new Input('tags');
+        $tags->setAllowEmpty(true);
+        $tags->setRequired(false);
         $tags
             ->getValidatorChain()
             ->attach(new IsCountable());
@@ -68,6 +70,8 @@ class BlogArticleInputFilterFactory
             ->attach(new StripTags());
 
         $image = new Input('image');
+        $image->setAllowEmpty(true);
+        $image->setRequired(false);
         $image
             ->getFilterChain()
             ->attach(new StringTrim())
