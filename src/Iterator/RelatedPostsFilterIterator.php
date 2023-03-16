@@ -30,6 +30,9 @@ class RelatedPostsFilterIterator extends \FilterIterator
         $matchingTags = array_intersect($post->getTags(), $this->blogArticle->getTags());
         $matchingCategories = array_intersect($post->getCategories(), $this->blogArticle->getCategories());
 
-        return (!empty($matchingTags) || !empty($matchingCategories));
+        return (
+            $this->blogArticle->getSlug() !== $post->getSlug()  &&
+            (!empty($matchingTags) || !empty($matchingCategories))
+        );
     }
 }

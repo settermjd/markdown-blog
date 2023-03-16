@@ -191,7 +191,7 @@ EOF;
             [
                 [
                     "publishDate" => "2015-01-01",
-                    "slug" => "blogArticle-001",
+                    "slug" => "item-0003",
                     "title" => "BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001 BlogArticle 001",
                     "content" => <<<EOF
 In this blogArticle, I have a fireside chat with internationally recognized PHP expert, and all around good fella [Paul M. Jones](http://paul-m-jones.com), about one of his all-time favorite books - [The Mythical Man Month](http://www.amazon.co.uk/The-Mythical-Man-month-Software-Engineering/dp/0201835959).
@@ -207,9 +207,8 @@ EOF,
                     'tags' => ['PHP', 'Docker'],
                     'categories' => ['Software Development'],
                 ],
-                2,
+                1,
                 [
-                    'item-0003',
                     'item-0004'
                 ]
             ]
