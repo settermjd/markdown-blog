@@ -19,9 +19,10 @@ class RelatedPostsFilterIterator extends \FilterIterator
     }
 
     /**
-     * @inheritDoc
+     * Allow an article if it has any of the same tags or categories but doesn't have the same slug,
+     * i.e, isn't the same article.
      */
-    public function accept()
+    public function accept(): bool
     {
         /** @var BlogArticle $post */
         $post = $this->getInnerIterator()->current();
