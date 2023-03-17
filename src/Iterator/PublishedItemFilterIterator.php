@@ -15,7 +15,7 @@ use MarkdownBlog\Entity\BlogArticle;
  * @author Matthew Setter <matthew@matthewsetter.com>
  * @copyright 2015 Matthew Setter
  */
-class PublishedItemFilterIterator extends \FilterIterator
+class PublishedItemFilterIterator extends \FilterIterator implements \Countable
 {
     public function __construct(Iterator $iterator)
     {
@@ -34,5 +34,10 @@ class PublishedItemFilterIterator extends \FilterIterator
         $episode = $this->getInnerIterator()->current();
 
         return $episode->getPublishDate() <= new DateTime();
+    }
+
+    public function count(): int
+    {
+        return iterator_count($this->getInnerIterator());
     }
 }
