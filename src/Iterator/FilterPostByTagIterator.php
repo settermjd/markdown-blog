@@ -13,8 +13,7 @@ class FilterPostByTagIterator extends \FilterIterator
     public function __construct(Iterator $iterator, string $tag)
     {
         parent::__construct($iterator);
-
-        $this->tag = $tag;
+        $this->tag = strtolower($tag);
     }
 
     /**
@@ -26,9 +25,12 @@ class FilterPostByTagIterator extends \FilterIterator
         /** @var BlogArticle $post */
         $post = $this->getInnerIterator()->current();
 
-        return in_array(
-            strtolower($this->tag),
-            array_map('strtolower', $post->getTags())
-        );
+        // Filter out empty/null entries, which will break array_map's use of strtolower
+        $tags = array_filter($post->getTags());
+        if (! empty($tags)) {
+            return in_array($this->tag, array_map('strtolower', $tags));
+        }
+
+        return false;
     }
 }

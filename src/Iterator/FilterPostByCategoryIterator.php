@@ -16,7 +16,7 @@ class FilterPostByCategoryIterator extends FilterIterator
     {
         parent::__construct($iterator);
 
-        $this->category = $tag;
+        $this->category = strtolower($tag);
     }
 
     /**
@@ -28,9 +28,13 @@ class FilterPostByCategoryIterator extends FilterIterator
         /** @var BlogArticle $episode */
         $episode = $this->getInnerIterator()->current();
 
-        return in_array(
-            strtolower($this->category),
-            array_map('strtolower', $episode->getCategories())
-        );
+        // Filter out empty/null entries, which will break array_map's use of strtolower
+        $categories = array_filter($episode->getCategories());
+
+        if (! empty($categories)) {
+            return in_array($this->category, array_map('strtolower', $categories));
+        }
+
+        return false;
     }
 }
