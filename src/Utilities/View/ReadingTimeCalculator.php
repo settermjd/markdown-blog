@@ -15,6 +15,13 @@ use const PHP_ROUND_HALF_UP;
 
 final readonly class ReadingTimeCalculator
 {
+    public const int READING_SPEED_SLOW_ALOUD     = 100;
+    public const int READING_SPEED_AVERAGE_ALOUD  = 130;
+    public const int READING_SPEED_FAST_ALOUD     = 160;
+    public const int READING_SPEED_SLOW_SILENT    = 150;
+    public const int READING_SPEED_AVERAGE_SILENT = 250;
+    public const int READING_SPEED_FAST_SILENT    = 400;
+
     /**
      * @return array{'minutes': int, 'seconds': int}
      */
@@ -49,16 +56,16 @@ final readonly class ReadingTimeCalculator
     ): int {
         if ($readingType === ReadingType::Aloud) {
             return match ($readingSpeed) {
-                ReadingProficiency::Slow => 100,
-                ReadingProficiency::Average => 130,
-                ReadingProficiency::Fast => 160,
+                ReadingProficiency::Slow => self::READING_SPEED_SLOW_ALOUD,
+                ReadingProficiency::Average => self::READING_SPEED_AVERAGE_ALOUD,
+                ReadingProficiency::Fast => self::READING_SPEED_FAST_ALOUD,
             };
         }
 
         return match ($readingSpeed) {
-            ReadingProficiency::Slow => 150,
-            ReadingProficiency::Average => 250,
-            ReadingProficiency::Fast => 400,
+            ReadingProficiency::Slow => self::READING_SPEED_SLOW_SILENT,
+            ReadingProficiency::Average => self::READING_SPEED_AVERAGE_SILENT,
+            ReadingProficiency::Fast => self::READING_SPEED_FAST_SILENT,
         };
     }
 }

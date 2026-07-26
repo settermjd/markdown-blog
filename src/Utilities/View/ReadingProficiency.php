@@ -10,9 +10,9 @@ namespace Settermjd\MarkdownBlog\Utilities\View;
  * Based on https://wordstotime.com/, it provides values for three reading
  * speeds:
  *
- * - "Slow" (100 wpm (words per minute))
- * - "Average" (130 wpm)
- * - "Fast" (160 wpm)
+ * - "Slow"
+ * - "Average"
+ * - "Fast"
  */
 enum ReadingProficiency
 {
