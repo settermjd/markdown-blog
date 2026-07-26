@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Settermjd\MarkdownBlog\Utilities\View;
 
 use TimeConstants;
+use Twig\Attribute\AsTwigFunction;
 
 use function gmdate;
 use function round;
@@ -17,7 +18,8 @@ final readonly class ReadingTimeCalculator
     /**
      * @return array{'minutes': int, 'seconds': int}
      */
-    public function __invoke(
+    #[AsTwigFunction('get_reading_time')]
+    public function getReadingTime(
         ReadingType $readingType,
         ReadingProficiency $readingProficiency,
         string $text,
