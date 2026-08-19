@@ -19,7 +19,7 @@ use Settermjd\MarkdownBlog\RuntimeLoader\MarkdownRuntimeLoader;
 use Settermjd\MarkdownBlog\Utilities\View\ReadingTimeCalculator;
 use Settermjd\MarkdownBlog\ViewLayer;
 use Settermjd\MarkdownBlog\ViewLayer\Plates\Extensions\MarkdownToHtml;
-use Twig\Extension\AttributeExtension;
+use Settermjd\MarkdownBlog\ViewLayer\Twig\ReadingTimeExtension;
 use Twig\Extra\Intl\IntlExtension;
 use Twig\Extra\Markdown\MarkdownExtension;
 use Twig\RuntimeLoader\FactoryRuntimeLoader;
@@ -174,7 +174,7 @@ final class ConfigProvider
             'extensions'      => [
                 new IntlExtension(),
                 new MarkdownExtension(),
-                new AttributeExtension(ReadingTimeCalculator::class),
+                new ReadingTimeExtension(),
             ],
             'runtime_loaders' => [
                 new MarkdownRuntimeLoader(),
