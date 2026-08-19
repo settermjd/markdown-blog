@@ -1,122 +1,118 @@
 {
-    "name": "settermjd/mezzio-markdown-blog",
-    "description": "This is a file-based blog module for PHP's Mezzio framework that renders blog articles written in Markdown format, with YAML front-matter into HTML content that can be rendered in a template.",
-    "type": "project",
-    "license": "BSD-3-Clause",
-    "keywords": [
-        "mezzio",
-        "markdown",
-        "html",
-        "blog",
-        "middleware",
-        "psr",
-        "psr-7",
-        "psr-11",
-        "psr-15"
+  "name": "settermjd/mezzio-markdown-blog",
+  "description": "This is a file-based blog module for PHP's Mezzio framework that renders blog articles written in Markdown format, with YAML front-matter into HTML content that can be rendered in a template.",
+  "type": "project",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "mezzio",
+    "markdown",
+    "html",
+    "blog",
+    "middleware",
+    "psr",
+    "psr-7",
+    "psr-11",
+    "psr-15"
+  ],
+  "support": {
+    "docs": "https://github.com/settermjd/mezzio-markdown-blog/issues",
+    "issues": "https://github.com/settermjd/mezzio-markdown-blog/issues",
+    "source": "https://github.com/settermjd/mezzio-markdown-blog",
+    "rss": "https://github.com/settermjd/mezzio-markdown-blog/releases.atom"
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "laminas/laminas-component-installer": true
+    }
+  },
+  "extra": {
+    "laminas": {
+      "component-whitelist": [
+        "mezzio/mezzio",
+        "mezzio/mezzio-helpers",
+        "mezzio/mezzio-router",
+        "laminas/laminas-httphandlerrunner",
+        "mezzio/mezzio-fastroute",
+        "mezzio/mezzio-twigrenderer"
+      ],
+      "component": "Settermjd\\MarkdownBlog",
+      "config-provider": "Settermjd\\MarkdownBlog\\ConfigProvider"
+    }
+  },
+  "require": {
+    "php": "~8.3.0||~8.4.0||~8.5.0",
+    "composer/package-versions-deprecated": "^1.11.99.5",
+    "laminas/laminas-component-installer": "^3.8.0",
+    "laminas/laminas-config-aggregator": "^1.20.0",
+    "laminas/laminas-diactoros": "^3.8.0",
+    "laminas/laminas-hydrator": "^4.19.0",
+    "laminas/laminas-inputfilter": "^2.35",
+    "laminas/laminas-servicemanager": "^3.24",
+    "mezzio/mezzio": "^3.28.1",
+    "mezzio/mezzio-fastroute": "^3.14.0",
+    "mezzio/mezzio-helpers": "^5.20.0",
+    "mezzio/mezzio-laminasviewrenderer": "^2.19",
+    "mezzio/mezzio-platesrenderer": "^2.12",
+    "mezzio/mezzio-twigrenderer": "^2.17.0",
+    "michelf/php-markdown": "^2.0.0",
+    "mnapoli/front-yaml": "dev-add-php-8.4-support",
+    "monolog/monolog": "^3.9",
+    "psr/cache": "^3.0",
+    "psr/simple-cache": "^3.0",
+    "samdark/sitemap": "^2.4",
+    "stevegrunwell/time-constants": "^2.0",
+    "twig/intl-extra": "^3.21",
+    "twig/markdown-extra": "^3.21",
+    "zetacomponents/feed": "^1.4.5"
+  },
+  "require-dev": {
+    "filp/whoops": "^2.18.4",
+    "friendsofphp/php-cs-fixer": "^3.85.1",
+    "laminas/laminas-coding-standard": "^3.1.0",
+    "laminas/laminas-development-mode": "^3.14.0",
+    "mezzio/mezzio-tooling": "^2.13.0",
+    "mikey179/vfsstream": "^1.6.12",
+    "mockery/mockery": "^1.6.12",
+    "phpstan/phpdoc-parser": "^2.2",
+    "phpstan/phpstan": "^2.1.22",
+    "phpstan/phpstan-deprecation-rules": "^2.0.3",
+    "phpstan/phpstan-phpunit": "^2.0.7",
+    "phpunit/phpunit": "^12.3.4",
+    "psalm/plugin-phpunit": "^0.19.5",
+    "rector/rector": "^2.1.2",
+    "roave/security-advisories": "dev-master",
+    "symfony/dom-crawler": "^7.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Settermjd\\MarkdownBlog\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Settermjd\\MarkdownBlogTest\\": "test"
+    }
+  },
+  "scripts": {
+    "check": [
+      "@cs-check",
+      "@test",
+      "@static-analysis"
     ],
-    "support": {
-        "docs": "https://github.com/settermjd/mezzio-markdown-blog/issues",
-        "issues": "https://github.com/settermjd/mezzio-markdown-blog/issues",
-        "source": "https://github.com/settermjd/mezzio-markdown-blog",
-        "rss": "https://github.com/settermjd/mezzio-markdown-blog/releases.atom"
-    },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "composer/package-versions-deprecated": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "laminas/laminas-component-installer": true
-        }
-    },
-    "extra": {
-        "laminas": {
-            "component-whitelist": [
-                "mezzio/mezzio",
-                "mezzio/mezzio-helpers",
-                "mezzio/mezzio-router",
-                "laminas/laminas-httphandlerrunner",
-                "mezzio/mezzio-fastroute",
-                "mezzio/mezzio-twigrenderer"
-            ],
-            "component": "Settermjd\\MarkdownBlog",
-            "config-provider": "Settermjd\\MarkdownBlog\\ConfigProvider"
-        }
-    },
-    "require": {
-        "php": "~8.3.0||~8.4.0",
-        "composer/package-versions-deprecated": "^1.11.99.5",
-        "laminas/laminas-component-installer": "^3.5.0",
-        "laminas/laminas-config-aggregator": "^1.18.0",
-        "laminas/laminas-diactoros": "^3.6.0",
-        "laminas/laminas-hydrator": "^4.16.0",
-        "laminas/laminas-inputfilter": "^2.33.0",
-        "laminas/laminas-servicemanager": "^3.23.1",
-        "mezzio/mezzio": "^3.21.0",
-        "mezzio/mezzio-fastroute": "^3.13.0",
-        "mezzio/mezzio-helpers": "^5.18.0",
-        "mezzio/mezzio-laminasviewrenderer": "^2.18",
-        "mezzio/mezzio-platesrenderer": "^2.12",
-        "mezzio/mezzio-twigrenderer": "^2.17.0",
-        "michelf/php-markdown": "^2.0.0",
-        "mnapoli/front-yaml": "dev-add-php-8.4-support",
-        "monolog/monolog": "^3.9",
-        "psr/cache": "^3.0",
-        "psr/simple-cache": "^3.0",
-        "samdark/sitemap": "^2.4",
-        "twig/intl-extra": "^3.21",
-        "twig/markdown-extra": "^3.21",
-        "zetacomponents/feed": "^1.4.5"
-    },
-    "require-dev": {
-        "filp/whoops": "^2.18.4",
-        "friendsofphp/php-cs-fixer": "^3.85.1",
-        "laminas/laminas-coding-standard": "^3.1.0",
-        "laminas/laminas-development-mode": "^3.14.0",
-        "mezzio/mezzio-tooling": "^2.11.0",
-        "mikey179/vfsstream": "^1.6.12",
-        "mockery/mockery": "^1.6.12",
-        "phpstan/phpdoc-parser": "^2.2",
-        "phpstan/phpstan": "^2.1.22",
-        "phpstan/phpstan-deprecation-rules": "^2.0.3",
-        "phpstan/phpstan-phpunit": "^2.0.7",
-        "phpunit/phpunit": "^12.3.4",
-        "psalm/plugin-phpunit": "^0.19.5",
-        "rector/rector": "^2.1.2",
-        "roave/security-advisories": "dev-master",
-        "symfony/dom-crawler": "^7.3"
-    },
-    "autoload": {
-        "psr-4": {
-            "Settermjd\\MarkdownBlog\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Settermjd\\MarkdownBlogTest\\": "test"
-        }
-    },
-    "scripts": {
-        "check": [
-            "@cs-check",
-            "@test",
-            "@static-analysis"
-        ],
-        "clear-config-cache": "php bin/clear-config-cache.php",
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf",
-        "static-analysis": "phpstan analyse --memory-limit 256M --level 5 src test",
-        "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:settermjd/FrontYAML.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:settermjd/laminas-servicemanager.git",
-            "canonical": false
-        }
-    ]
+    "clear-config-cache": "php bin/clear-config-cache.php",
+    "cs-check": "phpcs",
+    "cs-fix": "phpcbf",
+    "static-analysis": "phpstan analyse --memory-limit 256M --level 5 src test",
+    "test": "phpunit --colors=always",
+    "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:settermjd/FrontYAML.git"
+    }
+  ]
 }

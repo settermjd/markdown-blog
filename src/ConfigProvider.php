@@ -16,10 +16,13 @@ use Settermjd\MarkdownBlog\InputFilter\BlogArticleInputFilterFactory;
 use Settermjd\MarkdownBlog\Items\ItemListerFactory;
 use Settermjd\MarkdownBlog\Items\ItemListerInterface;
 use Settermjd\MarkdownBlog\RuntimeLoader\MarkdownRuntimeLoader;
+use Settermjd\MarkdownBlog\Utilities\View\ReadingTimeCalculator;
 use Settermjd\MarkdownBlog\ViewLayer;
 use Settermjd\MarkdownBlog\ViewLayer\Plates\Extensions\MarkdownToHtml;
+use Settermjd\MarkdownBlog\ViewLayer\Twig\ReadingTimeExtension;
 use Twig\Extra\Intl\IntlExtension;
 use Twig\Extra\Markdown\MarkdownExtension;
+use Twig\RuntimeLoader\FactoryRuntimeLoader;
 
 /**
  * The configuration provider for the module
@@ -171,9 +174,17 @@ final class ConfigProvider
             'extensions'      => [
                 new IntlExtension(),
                 new MarkdownExtension(),
+                new ReadingTimeExtension(),
             ],
             'runtime_loaders' => [
                 new MarkdownRuntimeLoader(),
+                new FactoryRuntimeLoader(
+                    [
+                        ReadingTimeCalculator::class => function () {
+                            return new ReadingTimeCalculator();
+                        },
+                    ]
+                ),
             ],
         ];
     }
